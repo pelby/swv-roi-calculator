@@ -1,0 +1,261 @@
+@import "tailwindcss";
+
+/* ============================================
+   Vibrant Enterprise Colour Palette
+   Brand: WithVoice / Start with Voice
+   ============================================ */
+
+@theme {
+  /* Primary - Orange (CTAs, positive metrics, ROI) */
+  --color-primary: #F97316;
+  --color-primary-hover: #FB923C;
+  --color-primary-dark: #EA580C;
+
+  /* Secondary - Indigo (trust, depth, secondary actions) */
+  --color-secondary: #6366F1;
+  --color-secondary-hover: #4F46E5;
+  --color-secondary-light: #818CF8;
+
+  /* Backgrounds */
+  --color-background: #F8FAFC;
+  --color-card: #FFFFFF;
+  --color-card-tint: #EEF2FF;
+
+  /* Text */
+  --color-text-primary: #1E293B;
+  --color-text-muted: #64748B;
+
+  /* Borders */
+  --color-border: #E2E8F0;
+
+  /* Pure */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
+  /* Semantic (accessibility-first: colour + icon + text) */
+  --color-positive: #F97316;
+  --color-negative: #6366F1;
+  --color-neutral: #64748B;
+
+  /* Typography Scale */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Font Sizes */
+  --text-hero-number: clamp(3.5rem, 8vw, 5rem);
+  --text-h1: clamp(2.5rem, 5vw, 3.5rem);
+  --text-h2: clamp(2rem, 4vw, 2.5rem);
+  --text-h3: clamp(1.25rem, 2vw, 1.5rem);
+  --text-body: clamp(1rem, 1.5vw, 1.125rem);
+  --text-caption: 0.875rem;
+
+  /* Container */
+  --container-max: 72rem;
+
+  /* Spacing */
+  --section-padding-y: clamp(3rem, 8vw, 5rem);
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    font-family: var(--font-body);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+  }
+
+  h1 { font-size: var(--text-h1); }
+  h2 { font-size: var(--text-h2); }
+  h3 { font-size: var(--text-h3); }
+
+  p {
+    font-size: var(--text-body);
+    color: var(--color-text-muted);
+  }
+}
+
+/* ============================================
+   Component Utilities
+   ============================================ */
+
+@layer components {
+  .container-main {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  .section {
+    padding-block: var(--section-padding-y);
+  }
+
+  .card {
+    background: var(--color-card);
+    border-radius: 1rem;
+    border: 1px solid var(--color-border);
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  }
+
+  .card-tinted {
+    background: var(--color-card-tint);
+  }
+
+  .hero-number {
+    font-family: var(--font-display);
+    font-size: var(--text-hero-number);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .metric-positive {
+    color: var(--color-positive);
+  }
+
+  .metric-negative {
+    color: var(--color-negative);
+  }
+
+  .metric-neutral {
+    color: var(--color-neutral);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-primary-hover);
+  }
+
+  .btn-secondary {
+    background: var(--color-secondary);
+    color: var(--color-white);
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-secondary-hover);
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 2px solid var(--color-border);
+    color: var(--color-text-primary);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    background: var(--color-white);
+    color: var(--color-text-primary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgb(249 115 22 / 0.1);
+  }
+
+  .label {
+    display: block;
+    font-size: var(--text-caption);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* ============================================
+   Voice Waveform Animation
+   ============================================ */
+
+@keyframes waveform {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+.waveform-bar {
+  width: 4px;
+  height: 40px;
+  background: var(--color-primary);
+  border-radius: 2px;
+  animation: waveform 1s ease-in-out infinite;
+}
+
+.waveform-bar:nth-child(1) { animation-delay: 0s; }
+.waveform-bar:nth-child(2) { animation-delay: 0.1s; }
+.waveform-bar:nth-child(3) { animation-delay: 0.2s; }
+.waveform-bar:nth-child(4) { animation-delay: 0.3s; }
+.waveform-bar:nth-child(5) { animation-delay: 0.4s; }
+.waveform-bar:nth-child(6) { animation-delay: 0.5s; }
+.waveform-bar:nth-child(7) { animation-delay: 0.6s; }
+
+/* ============================================
+   Gradient Background
+   ============================================ */
+
+.gradient-mesh {
+  background:
+    radial-gradient(ellipse at 20% 30%, rgb(99 102 241 / 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgb(249 115 22 / 0.06) 0%, transparent 50%),
+    var(--color-background);
+}
+
+/* Noise texture overlay for warmth */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+}

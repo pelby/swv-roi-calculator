@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voice Dictation ROI Calculator | Start with Voice</title>
+    <meta name="description" content="Calculate how much time and money your team could save with voice dictation. Free ROI calculator for professionals and teams." />
+
+    <!-- Fonts: Fraunces (display) + Satoshi (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet" />
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Voice Dictation ROI Calculator | Start with Voice" />
+    <meta property="og:description" content="Calculate how much time and money your team could save with voice dictation." />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <!-- Hidden form for Netlify Forms detection -->
+    <form name="roi-calculator-lead" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="bot-field" />
+      <input type="email" name="email" />
+      <input type="text" name="employees" />
+      <input type="text" name="annualSavings" />
+      <input type="text" name="roi" />
+      <input type="text" name="timestamp" />
+    </form>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
