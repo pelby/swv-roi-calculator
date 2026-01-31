@@ -71,12 +71,14 @@ export function ThreeYearChart({ inputs, financial }: ThreeYearChartProps) {
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: 0.1 }}
     >
-      <h3 className="mb-1">3-Year Projection</h3>
-      <p className="text-sm text-[var(--color-text-muted)] mb-6">
-        Cumulative financial impact over three years
-      </p>
+      <div className="mb-6">
+        <h3 className="mb-1">3-Year Projection</h3>
+        <p className="text-sm text-[var(--color-text-muted)]">
+          Cumulative financial impact
+        </p>
+      </div>
 
-      <div className="h-72">
+      <div className="h-72 min-h-72">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
             <defs>
@@ -129,23 +131,23 @@ export function ThreeYearChart({ inputs, financial }: ThreeYearChartProps) {
       </div>
 
       {/* Summary stats */}
-      <div className="mt-4 pt-4 border-t border-[var(--color-border)] grid grid-cols-3 gap-4 text-center">
-        <div>
-          <p className="text-xs text-[var(--color-text-muted)] mb-1">Total Investment</p>
-          <p className="font-semibold text-[var(--color-secondary)]">
+      <div className="mt-4 pt-4 border-t border-[var(--color-border)] grid grid-cols-3 gap-2 sm:gap-4">
+        <div className="text-center p-2 rounded-lg bg-[var(--color-background)]">
+          <p className="text-[10px] sm:text-xs text-[var(--color-text-muted)] mb-0.5">Investment</p>
+          <p className="text-sm sm:text-base font-semibold text-[var(--color-secondary)] tabular-nums">
             {formatCurrency(data[2].investment + data[1].investment + data[0].investment)}
           </p>
         </div>
-        <div>
-          <p className="text-xs text-[var(--color-text-muted)] mb-1">Total Savings</p>
-          <p className="font-semibold text-[var(--color-primary)]">
+        <div className="text-center p-2 rounded-lg bg-[var(--color-background)]">
+          <p className="text-[10px] sm:text-xs text-[var(--color-text-muted)] mb-0.5">Savings</p>
+          <p className="text-sm sm:text-base font-semibold text-[var(--color-primary)] tabular-nums">
             {formatCurrency(data[0].savings * 3)}
           </p>
         </div>
-        <div>
-          <p className="text-xs text-[var(--color-text-muted)] mb-1">Net Benefit</p>
+        <div className="text-center p-2 rounded-lg bg-[var(--color-primary)]/5">
+          <p className="text-[10px] sm:text-xs text-[var(--color-text-muted)] mb-0.5">Net Benefit</p>
           <p
-            className={`font-semibold ${
+            className={`text-sm sm:text-base font-bold tabular-nums ${
               data[2].cumulative >= 0 ? 'metric-positive' : 'metric-negative'
             }`}
           >

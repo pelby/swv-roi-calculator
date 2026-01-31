@@ -6,7 +6,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from 'recharts';
 import type { CalculatorInputs } from '../../types/calculator';
@@ -51,12 +50,14 @@ export function TimeComparisonChart({ inputs }: TimeComparisonChartProps) {
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
     >
-      <h3 className="mb-1">Time Comparison</h3>
-      <p className="text-sm text-[var(--color-text-muted)] mb-6">
-        Hours spent on text creation: typing vs voice dictation
-      </p>
+      <div className="mb-6">
+        <h3 className="mb-1">Time Comparison</h3>
+        <p className="text-sm text-[var(--color-text-muted)]">
+          Hours spent on text creation
+        </p>
+      </div>
 
-      <div className="h-64">
+      <div className="h-64 min-h-64">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
@@ -81,12 +82,6 @@ export function TimeComparisonChart({ inputs }: TimeComparisonChartProps) {
               tickFormatter={(value) => `${value}h`}
             />
             <Tooltip content={<CustomTooltip />} />
-            <Legend
-              wrapperStyle={{ paddingTop: 16 }}
-              formatter={(value) => (
-                <span className="text-sm text-[var(--color-text-muted)]">{value}</span>
-              )}
-            />
             <Bar
               dataKey="typing"
               name="Typing"

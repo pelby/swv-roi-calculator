@@ -67,42 +67,44 @@ export function MethodologySection() {
 
         {/* Formula breakdown */}
         <motion.div
-          className="mt-12 card card-tinted max-w-3xl mx-auto"
+          className="mt-12 card card-tinted max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <h3 className="mb-4">The Formula</h3>
-          <div className="space-y-4 text-sm">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-              <span className="font-semibold text-[var(--color-text-primary)] shrink-0">
-                Time Savings Ratio =
-              </span>
-              <code className="bg-[var(--color-card)] px-3 py-1 rounded border border-[var(--color-border)]">
-                (1 - TypingSpeed/VoiceSpeed) &times; AccuracyFactor &times; ProofreadingFactor
+          <h3 className="mb-6">The Formula</h3>
+          <div className="space-y-4">
+            <div className="p-4 rounded-lg bg-[var(--color-card)] border border-[var(--color-border)]">
+              <div className="text-xs text-[var(--color-text-muted)] mb-1">Step 1</div>
+              <div className="font-semibold text-[var(--color-text-primary)] mb-2">
+                Time Savings Ratio
+              </div>
+              <code className="text-sm text-[var(--color-secondary)] break-words">
+                (1 − TypingSpeed ÷ VoiceSpeed) × AccuracyFactor × ProofreadingFactor
               </code>
             </div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-              <span className="font-semibold text-[var(--color-text-primary)] shrink-0">
-                Hours Saved/Day =
-              </span>
-              <code className="bg-[var(--color-card)] px-3 py-1 rounded border border-[var(--color-border)]">
-                TypingHours &times; TimeSavingsRatio &times; AdoptionRate
+            <div className="p-4 rounded-lg bg-[var(--color-card)] border border-[var(--color-border)]">
+              <div className="text-xs text-[var(--color-text-muted)] mb-1">Step 2</div>
+              <div className="font-semibold text-[var(--color-text-primary)] mb-2">
+                Hours Saved per Day
+              </div>
+              <code className="text-sm text-[var(--color-secondary)]">
+                TypingHours × TimeSavingsRatio × AdoptionRate
               </code>
             </div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-              <span className="font-semibold text-[var(--color-text-primary)] shrink-0">
-                Annual Value =
-              </span>
-              <code className="bg-[var(--color-card)] px-3 py-1 rounded border border-[var(--color-border)]">
-                HoursSaved &times; WorkingDays &times; Employees &times; HourlyRate
+            <div className="p-4 rounded-lg bg-[var(--color-card)] border border-[var(--color-border)]">
+              <div className="text-xs text-[var(--color-text-muted)] mb-1">Step 3</div>
+              <div className="font-semibold text-[var(--color-text-primary)] mb-2">
+                Annual Value
+              </div>
+              <code className="text-sm text-[var(--color-secondary)]">
+                HoursSaved × WorkingDays × Employees × HourlyRate
               </code>
             </div>
           </div>
-          <p className="mt-4 text-sm text-[var(--color-text-muted)]">
-            All calculations use your custom inputs. Adjust the advanced settings to match
-            your organisation's specific context.
+          <p className="mt-6 text-sm text-[var(--color-text-muted)] text-center">
+            Adjust the advanced settings to match your organisation's specific context.
           </p>
         </motion.div>
       </div>

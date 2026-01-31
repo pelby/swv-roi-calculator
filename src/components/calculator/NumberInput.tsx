@@ -1,4 +1,5 @@
 import { useId } from 'react';
+import { Minus, Plus } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 interface NumberInputProps {
@@ -42,21 +43,19 @@ export function NumberInput({
   };
 
   return (
-    <div className={cn('space-y-1.5', className)}>
+    <div className={cn('space-y-2', className)}>
       <label htmlFor={id} className="label">
         {label}
         {unit && <span className="text-[var(--color-text-muted)] font-normal ml-1">({unit})</span>}
       </label>
-      <div className="relative flex items-center">
+      <div className="flex items-stretch rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] overflow-hidden">
         <button
           type="button"
           onClick={handleDecrement}
-          className="absolute left-2 w-8 h-8 flex items-center justify-center rounded-md hover:bg-[var(--color-card-tint)] text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
+          className="shrink-0 w-12 flex items-center justify-center border-r border-[var(--color-border)] hover:bg-[var(--color-card-tint)] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
           aria-label="Decrease"
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
-            <line x1="4" y1="8" x2="12" y2="8" />
-          </svg>
+          <Minus className="w-4 h-4" />
         </button>
         <input
           id={id}
@@ -66,22 +65,19 @@ export function NumberInput({
           min={min}
           max={max}
           step={step}
-          className="input text-center px-12 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          className="flex-1 min-w-0 w-full py-3 px-2 text-center font-semibold text-[var(--color-text-primary)] bg-transparent border-none outline-none focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         />
         <button
           type="button"
           onClick={handleIncrement}
-          className="absolute right-2 w-8 h-8 flex items-center justify-center rounded-md hover:bg-[var(--color-card-tint)] text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
+          className="shrink-0 w-12 flex items-center justify-center border-l border-[var(--color-border)] hover:bg-[var(--color-card-tint)] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
           aria-label="Increase"
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2">
-            <line x1="8" y1="4" x2="8" y2="12" />
-            <line x1="4" y1="8" x2="12" y2="8" />
-          </svg>
+          <Plus className="w-4 h-4" />
         </button>
       </div>
       {description && (
-        <p className="text-xs text-[var(--color-text-muted)]">{description}</p>
+        <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">{description}</p>
       )}
     </div>
   );

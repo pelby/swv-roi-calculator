@@ -33,7 +33,7 @@ export function CalculatorSection() {
         </motion.div>
 
         {/* Asymmetric layout: 40% inputs, 60% results on desktop */}
-        <div className="grid lg:grid-cols-[2fr,3fr] gap-8 items-start">
+        <div className="grid lg:grid-cols-[2fr_3fr] gap-8 items-start">
           {/* Input Panel */}
           <motion.div
             className="lg:sticky lg:top-24"

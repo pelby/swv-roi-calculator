@@ -53,7 +53,7 @@ export function BasicInputs({ inputs, onChange }: BasicInputsProps) {
 
       <div className="pt-4 border-t border-[var(--color-border)]">
         <h4 className="font-semibold text-[var(--color-text-primary)] mb-4">Costs</h4>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <NumberInput
             label={INPUT_META.labourRatePerHour.label}
             description={INPUT_META.labourRatePerHour.description}

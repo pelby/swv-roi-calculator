@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Clock, DollarSign, Users, TrendingUp } from 'lucide-react';
+import { Clock, DollarSign, Users, Settings2 } from 'lucide-react';
 import type { CalculatorInputs, CalculatorOutputs } from '../../types/calculator';
 import {
   formatCurrency,
@@ -15,18 +15,42 @@ interface ResultsDeepDiveProps {
   outputs: CalculatorOutputs;
 }
 
+interface MetricRowProps {
+  label: string;
+  value: string;
+  highlight?: boolean;
+  valueColor?: 'primary' | 'secondary' | 'default';
+}
+
+function MetricRow({ label, value, highlight, valueColor = 'default' }: MetricRowProps) {
+  const valueClasses = {
+    primary: 'text-[var(--color-primary)]',
+    secondary: 'text-[var(--color-secondary)]',
+    default: 'text-[var(--color-text-primary)]',
+  };
+
+  return (
+    <div className={`flex items-baseline justify-between gap-3 py-2 ${highlight ? 'pt-3 mt-1 border-t border-[var(--color-border)]' : ''}`}>
+      <span className="text-sm text-[var(--color-text-muted)] shrink-0">{label}</span>
+      <span className={`text-sm font-semibold tabular-nums text-right ${highlight ? 'font-bold' : ''} ${valueClasses[valueColor]}`}>
+        {value}
+      </span>
+    </div>
+  );
+}
+
 export function ResultsDeepDive({ inputs, outputs }: ResultsDeepDiveProps) {
   const { time, financial, organisation } = outputs;
 
   return (
     <div className="space-y-8">
       {/* Charts */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 gap-6 auto-rows-min">
         <TimeComparisonChart inputs={inputs} />
         <ThreeYearChart inputs={inputs} financial={financial} />
       </div>
 
-      {/* Detailed metrics */}
+      {/* Detailed metrics - redesigned for clarity */}
       <motion.div
         className="card"
         initial={{ opacity: 0, y: 20 }}
@@ -36,118 +60,87 @@ export function ResultsDeepDive({ inputs, outputs }: ResultsDeepDiveProps) {
       >
         <h3 className="mb-6">Detailed Breakdown</h3>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 gap-8">
           {/* Time Savings */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-[var(--color-primary)]">
-              <Clock className="w-5 h-5" />
-              <span className="font-semibold">Time Savings</span>
+          <div className="p-4 rounded-xl bg-[var(--color-background)]">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-8 h-8 rounded-lg bg-[var(--color-primary)]/10 flex items-center justify-center">
+                <Clock className="w-4 h-4 text-[var(--color-primary)]" />
+              </div>
+              <span className="font-semibold text-[var(--color-text-primary)]">Time Savings</span>
             </div>
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-[var(--color-text-muted)]">Per person/day</span>
-                <span className="font-medium">{formatHours(time.dailyHoursSavedPerPerson)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[var(--color-text-muted)]">Per person/week</span>
-                <span className="font-medium">{formatHours(time.weeklyHoursSavedPerPerson)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[var(--color-text-muted)]">Per person/year</span>
-                <span className="font-medium">{formatHours(time.annualHoursSavedPerPerson)}</span>
-              </div>
-              <div className="flex justify-between pt-2 border-t border-[var(--color-border)]">
-                <span className="text-[var(--color-text-muted)]">Team total/year</span>
-                <span className="font-bold text-[var(--color-primary)]">
-                  {formatHours(time.annualHoursSavedTotal)}
-                </span>
-              </div>
+            <div className="space-y-0">
+              <MetricRow label="Per person/day" value={formatHours(time.dailyHoursSavedPerPerson)} />
+              <MetricRow label="Per person/week" value={formatHours(time.weeklyHoursSavedPerPerson)} />
+              <MetricRow label="Per person/year" value={formatHours(time.annualHoursSavedPerPerson)} />
+              <MetricRow
+                label="Team total/year"
+                value={formatHours(time.annualHoursSavedTotal)}
+                highlight
+                valueColor="primary"
+              />
             </div>
           </div>
 
           {/* Financial Impact */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-[var(--color-secondary)]">
-              <DollarSign className="w-5 h-5" />
-              <span className="font-semibold">Financial Impact</span>
+          <div className="p-4 rounded-xl bg-[var(--color-background)]">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-8 h-8 rounded-lg bg-[var(--color-secondary)]/10 flex items-center justify-center">
+                <DollarSign className="w-4 h-4 text-[var(--color-secondary)]" />
+              </div>
+              <span className="font-semibold text-[var(--color-text-primary)]">Financial Impact</span>
             </div>
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-[var(--color-text-muted)]">Productivity value</span>
-                <span className="font-medium">{formatCurrency(financial.annualProductivityValue)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[var(--color-text-muted)]">Software cost</span>
-                <span className="font-medium text-[var(--color-secondary)]">
-                  -{formatCurrency(financial.annualSoftwareCost)}
-                </span>
-              </div>
-              <div className="flex justify-between pt-2 border-t border-[var(--color-border)]">
-                <span className="text-[var(--color-text-muted)]">Net savings/year</span>
-                <span
-                  className={`font-bold ${
-                    financial.annualNetSavings >= 0 ? 'metric-positive' : 'metric-negative'
-                  }`}
-                >
-                  {formatCurrency(financial.annualNetSavings)}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[var(--color-text-muted)]">Net savings/month</span>
-                <span className="font-medium">{formatCurrency(financial.monthlyNetSavings)}</span>
-              </div>
+            <div className="space-y-0">
+              <MetricRow label="Productivity value" value={formatCurrency(financial.annualProductivityValue)} />
+              <MetricRow
+                label="Software cost"
+                value={`-${formatCurrency(financial.annualSoftwareCost)}`}
+                valueColor="secondary"
+              />
+              <MetricRow
+                label="Net savings/year"
+                value={formatCurrency(financial.annualNetSavings)}
+                highlight
+                valueColor={financial.annualNetSavings >= 0 ? 'primary' : 'secondary'}
+              />
+              <MetricRow label="Net savings/month" value={formatCurrency(financial.monthlyNetSavings)} />
             </div>
           </div>
 
           {/* Organisation Impact */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-[var(--color-text-primary)]">
-              <Users className="w-5 h-5" />
-              <span className="font-semibold">Organisation Impact</span>
+          <div className="p-4 rounded-xl bg-[var(--color-background)]">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-8 h-8 rounded-lg bg-[var(--color-text-muted)]/10 flex items-center justify-center">
+                <Users className="w-4 h-4 text-[var(--color-text-muted)]" />
+              </div>
+              <span className="font-semibold text-[var(--color-text-primary)]">Organisation Impact</span>
             </div>
-            <div className="space-y-2">
-              <div className="flex justify-between">
-                <span className="text-[var(--color-text-muted)]">FTE equivalent</span>
-                <span className="font-medium">
-                  {formatFTE(organisation.effectiveEmployeesEquivalent)} employees
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[var(--color-text-muted)]">Productivity gain</span>
-                <span className="font-medium">
-                  {formatPercent(organisation.totalProductivityGainPercent, 0)}
-                </span>
-              </div>
-              <div className="flex justify-between pt-2 border-t border-[var(--color-border)]">
-                <span className="text-[var(--color-text-muted)]">Team size</span>
-                <span className="font-medium">{inputs.employees} people</span>
-              </div>
+            <div className="space-y-0">
+              <MetricRow
+                label="FTE equivalent"
+                value={`${formatFTE(organisation.effectiveEmployeesEquivalent)} employees`}
+              />
+              <MetricRow
+                label="Productivity gain"
+                value={formatPercent(organisation.totalProductivityGainPercent, 0)}
+              />
+              <MetricRow label="Team size" value={`${inputs.employees} people`} highlight />
             </div>
           </div>
 
-          {/* Assumptions Summary */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-[var(--color-text-muted)]">
-              <TrendingUp className="w-5 h-5" />
-              <span className="font-semibold">Key Assumptions</span>
+          {/* Key Assumptions */}
+          <div className="p-4 rounded-xl bg-[var(--color-background)]">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-8 h-8 rounded-lg bg-[var(--color-text-muted)]/10 flex items-center justify-center">
+                <Settings2 className="w-4 h-4 text-[var(--color-text-muted)]" />
+              </div>
+              <span className="font-semibold text-[var(--color-text-primary)]">Key Assumptions</span>
             </div>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-[var(--color-text-muted)]">Typing speed</span>
-                <span className="font-medium">{inputs.typingSpeedWPM} WPM</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[var(--color-text-muted)]">Voice speed</span>
-                <span className="font-medium">{inputs.voiceSpeedWPM} WPM</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[var(--color-text-muted)]">Adoption rate</span>
-                <span className="font-medium">{inputs.adoptionRatePercent}%</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[var(--color-text-muted)]">Working days</span>
-                <span className="font-medium">{inputs.workingDaysPerYear}/year</span>
-              </div>
+            <div className="space-y-0">
+              <MetricRow label="Typing speed" value={`${inputs.typingSpeedWPM} WPM`} />
+              <MetricRow label="Voice speed" value={`${inputs.voiceSpeedWPM} WPM`} />
+              <MetricRow label="Adoption rate" value={`${inputs.adoptionRatePercent}%`} />
+              <MetricRow label="Working days" value={`${inputs.workingDaysPerYear}/year`} />
             </div>
           </div>
         </div>
