@@ -106,18 +106,18 @@ export const INPUT_META = {
     unit: 'WPM',
   },
   labourRatePerHour: {
-    label: 'Hourly cost',
-    description: 'Fully loaded cost per employee hour (salary + benefits)',
-    unit: '£/hour',
+    label: 'Hourly rate',
+    description: 'Fully loaded cost per employee hour',
+    unit: '£/hr',
   },
   softwareCostPerMonth: {
-    label: 'Software cost',
-    description: 'Per-user monthly subscription for dictation software',
-    unit: '£/user/month',
+    label: 'Software',
+    description: 'Per-user monthly subscription',
+    unit: '£/user/mo',
   },
   deploymentCost: {
     label: 'Setup cost',
-    description: 'One-time training and deployment costs',
+    description: 'One-time training and deployment',
     unit: '£',
   },
   workingDaysPerYear: {
