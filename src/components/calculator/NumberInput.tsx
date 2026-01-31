@@ -48,11 +48,11 @@ export function NumberInput({
         {label}
         {unit && <span className="text-[var(--color-text-muted)] font-normal ml-1">({unit})</span>}
       </label>
-      <div className="flex items-stretch rounded-lg border border-[var(--color-border)] bg-[var(--color-card)] overflow-hidden">
+      <div className="flex items-stretch rounded-lg border border-[var(--color-border)] bg-white overflow-hidden">
         <button
           type="button"
           onClick={handleDecrement}
-          className="shrink-0 w-12 flex items-center justify-center border-r border-[var(--color-border)] hover:bg-[var(--color-card-tint)] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
+          className="shrink-0 w-12 flex items-center justify-center border-r border-[var(--color-border)] hover:bg-slate-50 text-slate-400 hover:text-[var(--color-primary)] transition-colors"
           aria-label="Decrease"
         >
           <Minus className="w-4 h-4" />
@@ -65,12 +65,13 @@ export function NumberInput({
           min={min}
           max={max}
           step={step}
-          className="flex-1 min-w-0 w-full py-3 px-2 text-center font-semibold text-[var(--color-text-primary)] bg-transparent border-none outline-none focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          style={{ color: '#1E293B' }}
+          className="flex-1 min-w-0 w-full py-3 px-2 text-center font-semibold text-slate-800 bg-white border-none outline-none focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         />
         <button
           type="button"
           onClick={handleIncrement}
-          className="shrink-0 w-12 flex items-center justify-center border-l border-[var(--color-border)] hover:bg-[var(--color-card-tint)] text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors"
+          className="shrink-0 w-12 flex items-center justify-center border-l border-[var(--color-border)] hover:bg-slate-50 text-slate-400 hover:text-[var(--color-primary)] transition-colors"
           aria-label="Increase"
         >
           <Plus className="w-4 h-4" />
